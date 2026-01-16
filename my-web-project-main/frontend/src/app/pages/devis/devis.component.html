@@ -1,0 +1,115 @@
+<div class="devis-container">
+  <header class="devis-header">
+    <h1>Demande de Devis</h1>
+    <p>Remplissez le formulaire pour votre projet de construction</p>
+  </header>
+
+  <div class="progress-steps">
+    <div class="step" [class.active]="currentStep === 1">1. Informations</div>
+    <div class="step" [class.active]="currentStep === 2">2. Projet</div>
+    <div class="step" [class.active]="currentStep === 3">3. Finalisation</div>
+  </div>
+
+  <!-- Étape 1 -->
+  <div class="form-step" *ngIf="currentStep === 1 && !showSuccess">
+    <h2>Vos informations</h2>
+    
+    <div class="form-group">
+      <label>Nom complet *</label>
+      <input type="text" [(ngModel)]="projectData.clientName" placeholder="Votre nom" required>
+    </div>
+    
+    <div class="form-group">
+      <label>Email *</label>
+      <input type="email" [(ngModel)]="projectData.clientEmail" placeholder="exemple@email.com" required>
+    </div>
+    
+    <div class="form-group">
+      <label>Téléphone *</label>
+      <input type="tel" [(ngModel)]="projectData.clientPhone" placeholder="12345678" required>
+    </div>
+    
+    <div class="form-group">
+      <label>Adresse du projet *</label>
+      <input type="text" [(ngModel)]="projectData.projectAddress" placeholder="Adresse complète" required>
+    </div>
+    
+    <div class="form-actions">
+      <button class="btn btn-primary" (click)="nextStep()">Suivant</button>
+    </div>
+  </div>
+
+  <!-- Étape 2 -->
+  <div class="form-step" *ngIf="currentStep === 2 && !showSuccess">
+    <h2>Détails du projet</h2>
+    
+    <div class="form-group">
+      <label>Type de projet *</label>
+      <select [(ngModel)]="projectData.projectType" required>
+        <option value="">Sélectionnez...</option>
+        <option value="construction">Construction neuve</option>
+        <option value="renovation">Rénovation</option>
+        <option value="extension">Extension</option>
+        <option value="interior">Aménagement intérieur</option>
+      </select>
+    </div>
+    
+    <div class="form-group">
+      <label>Surface (m²) *</label>
+      <input type="number" [(ngModel)]="projectData.surface" placeholder="Ex: 150" required>
+    </div>
+    
+    <div class="form-group">
+      <label>Budget estimé</label>
+      <select [(ngModel)]="projectData.budget">
+        <option value="">Sélectionnez...</option>
+        <option value="0-20000">Moins de 20 000€</option>
+        <option value="20000-50000">20 000€ - 50 000€</option>
+        <option value="50000-100000">50 000€ - 100 000€</option>
+      </select>
+    </div>
+    
+    <div class="form-group">
+      <label>Description du projet *</label>
+      <textarea [(ngModel)]="projectData.description" rows="4" placeholder="Décrivez votre projet..." required></textarea>
+    </div>
+    
+    <div class="form-actions">
+      <button class="btn btn-secondary" (click)="prevStep()">Précédent</button>
+      <button class="btn btn-primary" (click)="nextStep()">Suivant</button>
+    </div>
+  </div>
+
+  <!-- Étape 3 -->
+  <div class="form-step" *ngIf="currentStep === 3 && !showSuccess">
+    <h2>Récapitulatif</h2>
+    
+    <div class="summary">
+      <h3>Vos informations</h3>
+      <p><strong>Nom:</strong> {{ projectData.clientName }}</p>
+      <p><strong>Email:</strong> {{ projectData.clientEmail }}</p>
+      <p><strong>Téléphone:</strong> {{ projectData.clientPhone }}</p>
+      <p><strong>Adresse:</strong> {{ projectData.projectAddress }}</p>
+      
+      <h3>Détails du projet</h3>
+      <p><strong>Type:</strong> {{ projectData.projectType }}</p>
+      <p><strong>Surface:</strong> {{ projectData.surface }} m²</p>
+      <p><strong>Budget:</strong> {{ projectData.budget }}</p>
+      <p><strong>Description:</strong> {{ projectData.description }}</p>
+    </div>
+    
+    <div class="form-actions">
+      <button class="btn btn-secondary" (click)="prevStep()">Précédent</button>
+      <button class="btn btn-primary" (click)="submitForm()">Envoyer la demande</button>
+    </div>
+  </div>
+
+  <!-- Succès -->
+  <div class="success-step" *ngIf="showSuccess">
+    <div class="success-icon">✓</div>
+    <h2>Demande envoyée avec succès !</h2>
+    <p>Nous vous contacterons dans les plus brefs délais.</p>
+    <p>Redirection vers l'accueil...</p>
+    <button class="btn btn-primary" (click)="router.navigate(['/'])">Retour à l'accueil</button>
+  </div>
+</div>
