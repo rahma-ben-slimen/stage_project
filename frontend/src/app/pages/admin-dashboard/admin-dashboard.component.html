@@ -43,7 +43,7 @@
         <div class="stat-label">Clients</div>
       </div>
       <div class="stat-card">
-        <div class="stat-value">{{ stats.monthlyRevenue | currency:'EUR' }}</div>
+        <div class="stat-value">{{ stats.monthlyRevenue | currency:'TND':'symbol':'1.2-2' }}</div>
         <div class="stat-label">Revenu ce mois</div>
       </div>
     </div>
@@ -60,7 +60,6 @@
       @if (clients.length > 0) {
         <div class="clients-list">
           <table class="clients-table">
-            <thead>
               <tr>
                 <th>ID</th>
                 <th>Nom</th>
@@ -70,7 +69,6 @@
                 <th>Date d'inscription</th>
                 <th>Actions</th>
               </tr>
-            </thead>
             <tbody>
               @for (client of clients; track client.id) {
                 <tr>

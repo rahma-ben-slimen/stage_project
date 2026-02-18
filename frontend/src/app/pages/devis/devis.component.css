@@ -6,6 +6,10 @@
 
 .devis-header {
   background: linear-gradient(135deg, #1a3a5f 0%, #2c5282 100%);
+
+  background-image:  url('../../../assets/images/1.jpg');
+  background-position: center;
+  background-size: cover;
   color: white;
   padding: 4rem 2rem;
   text-align: center;

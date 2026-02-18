@@ -33,9 +33,7 @@ class User {
           userData.role || 'client'
         ]
       );
-      
-      console.log('✅ Utilisateur créé avec ID:', result.insertId);
-      
+      console.log('✅ Utilisateur créé ');
       return {
         id: result.insertId,
         prenom: userData.prenom,

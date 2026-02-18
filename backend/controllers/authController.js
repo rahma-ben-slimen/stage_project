@@ -19,16 +19,13 @@ const generateToken = (user) => {
 exports.register = async (req, res) => {
   try {
     console.log('📝 REGISTER - Body reçu:', req.body);
-    
     const { prenom, nom, telephone, email, password } = req.body;
-    
     if (!prenom || !email || !password) {
       return res.status(400).json({
         success: false,
         message: 'Prénom, email et mot de passe sont requis'
       });
     }
-    
     const existingUser = await User.findByEmail(email);
     if (existingUser) {
       return res.status(400).json({
@@ -36,19 +33,16 @@ exports.register = async (req, res) => {
         message: 'Cet email est déjà utilisé'
       });
     }
-    
-    // TOUJOURS créer un utilisateur avec rôle 'client'
+
     const user = await User.create({
       prenom,
       nom: nom || prenom,
       telephone: telephone || '',
       email,
       password,
-      role: 'client' // FORCER le rôle client
+      role: 'client' // forcer le rôle client
     });
-    
     const token = generateToken(user);
-    
     console.log('✅ Inscription réussie pour:', email);
     
     res.status(201).json({
@@ -86,36 +80,28 @@ exports.register = async (req, res) => {
 exports.login = async (req, res) => {
   try {
     console.log('🔑 LOGIN - Tentative pour:', req.body.email);
-    
     const { email, password } = req.body;
-    
     if (!email || !password) {
       return res.status(400).json({
         success: false,
         message: 'Email et mot de passe requis'
       });
     }
-    
     const user = await User.findByEmail(email);
-    
     if (!user) {
       return res.status(401).json({
         success: false,
         message: 'Email ou mot de passe incorrect'
       });
     }
-    
     const isPasswordValid = await User.comparePassword(password, user.password);
-    
     if (!isPasswordValid) {
       return res.status(401).json({
         success: false,
         message: 'Email ou mot de passe incorrect'
       });
     }
-    
     const token = generateToken(user);
-    
     console.log('✅ Connexion réussie pour:', email);
     
     res.json({

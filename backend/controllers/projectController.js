@@ -4,21 +4,17 @@ const { pool } = require('../config/database');
 exports.createProject = async (req, res) => {
   try {
     console.log('📝 CREATE PROJECT - User ID:', req.userId);
-    
     if (!req.body.clientName || !req.body.clientEmail) {
       return res.status(400).json({
         success: false,
         message: 'Nom et email requis'
       });
     }
-    
     const projectData = {
       ...req.body,
       userId: req.userId
     };
-
     const projectId = await Project.create(projectData);
-    
     res.status(201).json({
       success: true,
       message: 'Projet créé avec succès',

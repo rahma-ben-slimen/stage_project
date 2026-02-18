@@ -18,10 +18,10 @@ const pool = mysql.createPool({
 async function testConnection() {
   try {
     const connection = await pool.getConnection();
-    console.log(`✅ Connecté à MySQL - Base: ${process.env.DB_NAME}`);
+    console.log(` Connecté à MySQL - Base: ${process.env.DB_NAME}`);
     
     const [tables] = await connection.execute("SHOW TABLES");
-    console.log(`📊 Tables: ${tables.map(t => Object.values(t)[0]).join(', ')}`);
+    console.log(`Tables: ${tables.map(t => Object.values(t)[0]).join(', ')}`);
     
     connection.release();
     return true;

@@ -18,6 +18,7 @@ const publicRoutes = require('./routes/publicRoutes');
 const { testConnection } = require('./config/database');
 
 const app = express();
+app.use(adminRoutes);
 
 // CORRECTION: Middleware CORS pour les images
 app.use(cors({
@@ -137,10 +138,10 @@ async function startServer() {
     
     // Démarrer le serveur
     app.listen(PORT, () => {
-      console.log(`🚀 Serveur démarré sur http://localhost:${PORT}`);
-      console.log(`📁 Uploads: http://localhost:${PORT}/uploads/projects/`);
-      console.log(`🔍 Debug: http://localhost:${PORT}/api/debug/uploads`);
-      console.log(`🏗️  Projets: http://localhost:${PORT}/api/upload/projects`);
+      console.log(` Serveur démarré sur http://localhost:${PORT}`);
+      console.log(` Uploads: http://localhost:${PORT}/uploads/projects/`);
+      console.log(` Debug: http://localhost:${PORT}/api/debug/uploads`);
+      console.log(`  Projets: http://localhost:${PORT}/api/upload/projects`);
     });
     
   } catch (error) {

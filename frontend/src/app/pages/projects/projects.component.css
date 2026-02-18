@@ -6,7 +6,7 @@
 /* Hero Section */
 .projects-hero {
   background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
-              url('../../../assets/images/construction.png');
+              url('../../../assets/images/2.jpg');
   background-size: cover;
   background-position: center;
   color: white;
@@ -119,12 +119,17 @@
 
 .btn-add {
   background-color: #4299e1;
+  background-color: #550816;
   color: white;
   border: none;
   padding: 0.75rem 2rem;
   border-radius: 6px;
   cursor: pointer;
   font-weight: 600;
+}
+
+.btn-add:hover {
+  background-color: #092a48;
 }
 
 /* Projects Grid */
